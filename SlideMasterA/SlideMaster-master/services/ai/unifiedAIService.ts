@@ -603,7 +603,7 @@ export async function analyzeVideo(videoData: string, prompt?: string): Promise<
   return aiService.analyzeVideo(videoData, prompt);
 }
 
-// タスク別APIキー検証機能
+// タスク別APIキー検証機能（ローカルLLMプロバイダー対応）
 export function hasValidAPIKey(taskType: 'text' | 'image' | 'video' = 'text'): boolean {
   try {
     const settings = getUserSettings();
@@ -640,6 +640,23 @@ export function hasValidAPIKey(taskType: 'text' | 'image' | 'video' = 'text'): b
       case 'gemini':
         const geminiAuth = settings.providerAuth?.gemini?.[taskKey];
         return !!(geminiAuth?.apiKey);
+      // ローカルLLMプロバイダー（テキスト生成） - APIキー不要、エンドポイントのみ
+      case 'ollama':
+        const ollamaConfig = settings.providerAuth?.ollama;
+        return !!(ollamaConfig?.endpoint);
+      case 'lmstudio':
+        const lmstudioConfig = settings.providerAuth?.lmstudio;
+        return !!(lmstudioConfig?.endpoint);
+      case 'llamacpp':
+        const llamacppConfig = settings.providerAuth?.llamacpp;
+        return !!(llamacppConfig?.endpoint);
+      // ローカル画像生成プロバイダー - APIキー不要、エンドポイントのみ
+      case 'stable_diffusion':
+        const sdConfig = settings.providerAuth?.stable_diffusion;
+        return !!(sdConfig?.endpoint);
+      case 'comfyui':
+        const comfyConfig = settings.providerAuth?.comfyui;
+        return !!(comfyConfig?.endpoint);
       default:
         return false;
     }
@@ -648,7 +665,7 @@ export function hasValidAPIKey(taskType: 'text' | 'image' | 'video' = 'text'): b
   }
 }
 
-// 設定の詳細なチェックと不足項目の報告
+// 設定の詳細なチェックと不足項目の報告（ローカルLLMプロバイダー対応）
 export function validateAIConfiguration(taskType: 'text' | 'image' | 'video' = 'text'): { valid: boolean; errors: string[] } {
   const errors: string[] = [];
   const settings = getUserSettings();
@@ -694,6 +711,33 @@ export function validateAIConfiguration(taskType: 'text' | 'image' | 'video' = '
       const geminiAuth = settings.providerAuth?.gemini?.[taskKey];
       if (!geminiAuth?.apiKey) {
         errors.push(`Gemini APIキーが設定されていません（${taskType}）`);
+      }
+      break;
+    // ローカルLLMプロバイダー（テキスト生成） - エンドポイントのみ必要
+    case 'ollama':
+      if (!settings.providerAuth?.ollama?.endpoint) {
+        errors.push('Ollamaエンドポイントが設定されていません');
+      }
+      break;
+    case 'lmstudio':
+      if (!settings.providerAuth?.lmstudio?.endpoint) {
+        errors.push('LM Studioエンドポイントが設定されていません');
+      }
+      break;
+    case 'llamacpp':
+      if (!settings.providerAuth?.llamacpp?.endpoint) {
+        errors.push('Llama.cppエンドポイントが設定されていません');
+      }
+      break;
+    // ローカル画像生成プロバイダー - エンドポイントのみ必要
+    case 'stable_diffusion':
+      if (!settings.providerAuth?.stable_diffusion?.endpoint) {
+        errors.push('Stable Diffusionエンドポイントが設定されていません');
+      }
+      break;
+    case 'comfyui':
+      if (!settings.providerAuth?.comfyui?.endpoint) {
+        errors.push('ComfyUIエンドポイントが設定されていません');
       }
       break;
     default:
