@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/database/database.dart';
 import '../../../../core/database/providers.dart';
 import '../providers/product_provider.dart';
+import '../widgets/product_image_widget.dart';
 
 /// 商品一覧画面（カテゴリ別）
 class ProductListScreen extends ConsumerWidget {
@@ -98,17 +99,9 @@ class _ProductCard extends ConsumerWidget {
       margin: const EdgeInsets.only(bottom: 12),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        leading: Container(
-          width: 48,
-          height: 48,
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondaryContainer,
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Icon(
-            Icons.shopping_bag,
-            color: Theme.of(context).colorScheme.onSecondaryContainer,
-          ),
+        leading: ProductImageWidget(
+          productId: product.id,
+          size: 48,
         ),
         title: Text(
           product.name,

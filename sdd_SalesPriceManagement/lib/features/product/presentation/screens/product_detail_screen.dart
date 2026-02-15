@@ -8,6 +8,7 @@ import '../../../../core/database/providers.dart';
 import '../../../price/presentation/providers/price_provider.dart';
 import '../../../store/presentation/providers/store_provider.dart';
 import '../../../analytics/presentation/widgets/price_chart_widget.dart';
+import '../widgets/product_image_widget.dart';
 
 /// 商品詳細画面（価格履歴とグラフ表示）
 class ProductDetailScreen extends ConsumerStatefulWidget {
@@ -79,18 +80,10 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                     children: [
                       Row(
                         children: [
-                          Container(
-                            width: 56,
-                            height: 56,
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.primaryContainer,
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Icon(
-                              Icons.shopping_bag,
-                              size: 32,
-                              color: Theme.of(context).colorScheme.onPrimaryContainer,
-                            ),
+                          ProductImageWidget(
+                            productId: widget.productId,
+                            size: 72,
+                            showEditButton: true,
                           ),
                           const SizedBox(width: 16),
                           Expanded(
