@@ -1,0 +1,20 @@
+# OS/Editor
+.DS_Store
+.vscode/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Antigravity / Claude Code Prompts & Caches
+.agent_prompts.jsonl
+.agent_prompts.md
+.claude/
+
+# Temporary directories
+_tmp/
+.tmp/
+tmp/

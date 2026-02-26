@@ -43,6 +43,11 @@ skills:
   description: "エージェントに特定のタスク手順やドメイン知識を付与するスキル・ガイド"
   
   core:
+    - id: context-manager
+      name: "コンテキスト・マネージャー"
+      path: "templates/skills/context-manager.md"
+      description: "フェーズ・技術スタックに応じて、catalog.yamlから必要なスキル・エージェントを動的に読み込み（ON）不要なものを忘れる（OFF）仕組み"
+      
     - id: skill-template
       name: "スキルテンプレート"
       path: "templates/skills/SKILL_TEMPLATE.md"
