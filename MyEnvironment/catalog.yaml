@@ -43,11 +43,6 @@ skills:
   description: "エージェントに特定のタスク手順やドメイン知識を付与するスキル・ガイド"
   
   core:
-    - id: context-manager
-      name: "コンテキスト・マネージャー"
-      path: "templates/skills/context-manager.md"
-      description: "フェーズ・技術スタックに応じて、catalog.yamlから必要なスキル・エージェントを動的に読み込み（ON）不要なものを忘れる（OFF）仕組み"
-      
     - id: skill-template
       name: "スキルテンプレート"
       path: "templates/skills/SKILL_TEMPLATE.md"
@@ -80,6 +75,11 @@ skills:
 subagents:
   description: "タスクに応じた特定の役割や専門性を持つエージェントプロンプト"
   items:
+    - id: context-manager
+      name: "コンテキスト・マネージャー設定エージェント"
+      path: "templates/subagents/context-manager.md"
+      description: "別プロセスとして呼び出され、catalog.yamlから現在のフェーズに必要なファイルパスのリストだけを抽出してPMエージェントに返却する裏方"
+      
     - id: subagent-template
       name: "サブエージェント設定テンプレート"
       path: "templates/subagents/subagent_template.yaml"
