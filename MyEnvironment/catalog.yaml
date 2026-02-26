@@ -31,6 +31,11 @@ rules:
       path: "templates/rules/rules_template.md"
       description: "AI開発のための全般的なルールのひな形"
       
+    - id: shared-memory
+      name: "共有記憶 (Shared Memory) ルール"
+      path: "templates/rules/shared_memory.md"
+      description: "エージェント間のサイロ化を防ぐため、Blueprint（青写真）とTicket（チケット）の二元管理を行うルール"
+      
     - id: spec-driven
       name: "スペック駆動開発ルール"
       path: "templates/rules/spec_driven_development.md"
